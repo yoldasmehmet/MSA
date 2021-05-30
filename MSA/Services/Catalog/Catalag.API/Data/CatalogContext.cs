@@ -13,13 +13,15 @@ namespace Catalag.API.Data
     {
         public CatalogContext(IConfiguration configuration)
         {
-            var dbsettings = configuration.GetSection("DtabaseSettings");
+            var dbsettings = configuration.GetSection("DatabaseSettings");
             var connstr = dbsettings.GetValue<string>("ConnectionString");
             var dbName = dbsettings.GetValue<string>("DatabaseName");
             var collectionName = dbsettings.GetValue<string>("CollectionName");
             var client = new MongoDB.Driver.MongoClient(connstr);
             var database = client.GetDatabase(dbName);
             Products = database.GetCollection<Product>(collectionName);
+    //     var kk=Products.AsQueryable().FirstOrDefault();
+            CatalogContextSeed.Seed(Products); 
         }
         public IMongoCollection<Product> Products { get; }
     }

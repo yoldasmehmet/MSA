@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Catalag.API.Data.Interfaces
 
 {
-    public class ICatalogContext
+    public interface ICatalogContext
     {
-        IMongoCollection<Product> Products { get; }
+        public IMongoCollection<Product> Products { get; }
     }
 }
